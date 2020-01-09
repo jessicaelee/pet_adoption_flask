@@ -58,17 +58,23 @@ function makeHtmlBoard() {
 /** findSpotForCol: given column x, return the topmost empty y (null if filled) */
 
 function findSpotForCol(x) {
-  // TODO: write the real version of this, rather than always returning 0
-  return 0;
+ for (let i=HEIGHT-1; i>=0; i--) {
+   if (board[x][i] === null) {
+      board[x][i] == currPlayer;
+     return i
+     
+   }
+  }
 }
 
 /** placeInTable: update DOM to place piece into HTML table of board */
 
 function placeInTable(y, x) {
   // TODO: make a div and insert into correct table cell
+ 
   let piece = document.createElement("div");
   piece.setAttribute("class", `piece piece${currPlayer}`);
-  console.log(document.getElementById(`${y}-${x}`).length);
+  console.log(`${y}`,'y');
   document.getElementById(`${y}-${x}`).appendChild(piece);
   
 }
@@ -76,7 +82,8 @@ function placeInTable(y, x) {
 /** placeInBoardArray: update array with the latest piece played */
 
 function placeInBoardArray(y,x) {
-  board[y][x] = (currPlayer);
+  //console.log('placeInBoardArray y, x', y, x)
+  board[x][y] = (currPlayer);
 }
 
 /** endGame: announce game end */
@@ -90,12 +97,14 @@ function endGame(msg) {
 function handleClick(evt) {
   // get x from ID of clicked cell
   var x = +evt.target.id;
-
+  //console.log(x);
   // get next spot in column (if none, ignore click)
   var y = findSpotForCol(x);
+  //console.log (y + ' this y');
   if (y === null) {
     return;
   }
+  
 
   // place piece in board and add to HTML table
   // update in-memory board
@@ -110,8 +119,11 @@ function handleClick(evt) {
     return endGame("Neither player won - TIE.");
   }
   else {
+    
     (currPlayer === 1) ? 2 : 1;
+    //console.log('currPlayer',currPlayer)
   }
+  //console.log('board',board);
 }
 
 /** checkForTie: check if all cells in board are filled. */
