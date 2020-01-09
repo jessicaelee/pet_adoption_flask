@@ -58,44 +58,32 @@ function makeHtmlBoard() {
 /** findSpotForCol: given column x, return the topmost empty y (null if filled) */
 
 function findSpotForCol(x) {
-  console.log(board);
   for (let i = HEIGHT - 1; i >= 0; i--) {
     if (board[i][x] === null) {
-      board[i][x] = currPlayer;
       return i
     }
-
   }
   return "no more";
 }
 
-
+function updateBoardArray(x, y) {
+  board[y][x] = currPlayer;
+}
 
 
 /** placeInTable: update DOM to place piece into HTML table of board */
 
 function placeInTable(y, x) {
-  // TODO: make a div and insert into correct table cell
-
   let piece = document.createElement("div");
   piece.setAttribute("class", `piece piece${currPlayer}`);
-  //console.log(`${y}`,'y');
   document.getElementById(`${y}-${x}`).appendChild(piece);
-
-}
-
-/** placeInBoardArray: update array with the latest piece played */
-
-function placeInBoardArray(y, x) {
-  //console.log('placeInBoardArray y, x', y, x)
-  //board[x][y] = (currPlayer);
 }
 
 /** endGame: announce game end */
 
 function endGame(msg) {
   document.getElementById("column-top").removeEventListener("click", handleClick)
-  alert(msg);
+  setTimeout(() => alert(msg));
 }
 
 /** handleClick: handle click of column top to play piece */
@@ -103,19 +91,16 @@ function endGame(msg) {
 function handleClick(evt) {
   // get x from ID of clicked cell
   var x = +evt.target.id;
-  //console.log(x);
   // get next spot in column (if none, ignore click)
   var y = findSpotForCol(x);
-  //console.log (y + ' this y');
   if (y === "no more") {
     return;
   }
 
+  updateBoardArray(x, y)
 
   // place piece in board and add to HTML table
-  // update in-memory board
   placeInTable(y, x);
-  placeInBoardArray(y, x);
 
   // check for win, check for tie, if not, switch player
   if (checkForWin()) {
@@ -128,16 +113,13 @@ function handleClick(evt) {
 
   }
   else {
-    console.log('ELSE!');
     if (currPlayer === 1) {
       currPlayer = 2;
     }
     else {
       currPlayer = 1;
     }
-    console.log('currPlayer', currPlayer)
   }
-  //console.log('board',board);
 }
 
 /** checkForTie: check if all cells in board are filled. */
