@@ -58,9 +58,11 @@ function makeHtmlBoard() {
 /** findSpotForCol: given column x, return the topmost empty y (null if filled) */
 
 function findSpotForCol(x) {
+  console.log(board);
  for (let i=HEIGHT-1; i>=0; i--) {
-   if (board[x][i] === null) {
-      board[x][i] == currPlayer;
+   console.log(i);
+   if (board[i][x] === null) {
+      board[i][x] = currPlayer;
      return i
      
    }
@@ -74,7 +76,7 @@ function placeInTable(y, x) {
  
   let piece = document.createElement("div");
   piece.setAttribute("class", `piece piece${currPlayer}`);
-  console.log(`${y}`,'y');
+  //console.log(`${y}`,'y');
   document.getElementById(`${y}-${x}`).appendChild(piece);
   
 }
@@ -83,7 +85,7 @@ function placeInTable(y, x) {
 
 function placeInBoardArray(y,x) {
   //console.log('placeInBoardArray y, x', y, x)
-  board[x][y] = (currPlayer);
+  //board[x][y] = (currPlayer);
 }
 
 /** endGame: announce game end */
@@ -119,7 +121,7 @@ function handleClick(evt) {
     return endGame("Neither player won - TIE.");
   }
   else {
-    
+    //console.log('ELSE!');
     (currPlayer === 1) ? 2 : 1;
     //console.log('currPlayer',currPlayer)
   }
