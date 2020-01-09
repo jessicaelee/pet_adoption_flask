@@ -60,7 +60,7 @@ function makeHtmlBoard() {
 function findSpotForCol(x) {
   console.log(board);
  for (let i=HEIGHT-1; i>=0; i--) {
-   console.log(i);
+   //console.log(i);
    if (board[i][x] === null) {
       board[i][x] = currPlayer;
      return i
@@ -121,9 +121,14 @@ function handleClick(evt) {
     return endGame("Neither player won - TIE.");
   }
   else {
-    //console.log('ELSE!');
-    (currPlayer === 1) ? 2 : 1;
-    //console.log('currPlayer',currPlayer)
+    console.log('ELSE!');
+    if (currPlayer === 1) {
+      currPlayer = 2;
+    }
+    else {
+      currPlayer =1;
+    }
+    console.log('currPlayer',currPlayer)
   }
   //console.log('board',board);
 }
