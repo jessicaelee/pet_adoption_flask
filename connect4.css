@@ -11,9 +11,12 @@
 .piece {
   /* TODO: make into circles */
   margin: 5px;
-  width: 80%;
-  height: 80%;
+  width: 35px;
+  height: 35px;
+  top: 0;
+  position: absolute;
   border-radius: 50%;
+  transition: top .5s;
 }
 
 .piece1 {
@@ -31,4 +34,7 @@
 
 #column-top td:hover {
   background-color: gold;
+}
+#game {
+  position: relative;
 }

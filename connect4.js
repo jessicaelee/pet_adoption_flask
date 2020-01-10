@@ -75,15 +75,24 @@ function updateBoardArray(x, y) {
 
 function placeInTable(y, x) {
   let piece = document.createElement("div");
+  let leftValue = x * 56 + 6;
+  piece.style.left = leftValue + 'px';
+  document.getElementById("game").appendChild(piece);
   piece.setAttribute("class", `piece piece${currPlayer}`);
-  document.getElementById(`${y}-${x}`).appendChild(piece);
+  
+  
+  setTimeout(() => {
+    let topValue = y * 55 + 65;
+    piece.style.top = topValue + 'px';
+    //document.getElementById(`${y}-${x}`).appendChild(piece), 500;
+  });
 }
 
 /** endGame: announce game end */
 
 function endGame(msg) {
   document.getElementById("column-top").removeEventListener("click", handleClick)
-  setTimeout(() => alert(msg));
+  setTimeout(() => alert(msg), 750);
 }
 
 /** handleClick: handle click of column top to play piece */
